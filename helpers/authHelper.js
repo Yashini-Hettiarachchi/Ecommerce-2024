@@ -1,6 +1,5 @@
 import bcrypt from 'bcrypt';
-import { hashPassword } from './authHelper';
-import { bgYellow } from 'colors';
+
 
 export const hashPassword = async(password)=>{
     try{
