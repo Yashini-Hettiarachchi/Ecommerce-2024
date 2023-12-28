@@ -94,8 +94,8 @@
   color: white;
 }
 /* ========================================= */
-/* =========contact us ========= */
-.contactus {
+/* =========page css ========= */
+.page {
   margin: 0;
   padding: 0;
   height: 70vh;
@@ -103,10 +103,5 @@
   align-items: center;
   justify-content: center;
 }
-/* =============================
-==========register page============= */
-.register{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+
+
