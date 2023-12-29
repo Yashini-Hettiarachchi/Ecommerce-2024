@@ -12,9 +12,11 @@ const Header = () => {
 
     });
     localStorage.removeItem("auth");
-    toast.success('Logout Successfully');
-    
+    toast.success("Logout Successfully", {
+      duration: 3000, // 3 seconds
+    });
   };
+
   return (
     <>
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
