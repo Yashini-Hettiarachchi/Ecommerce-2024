@@ -11,31 +11,46 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
+  const [answer, setAnswer] = useState("");
   const navigate = useNavigate();
 
-  //form function
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const res = await axios.post(
-        `${process.env.REACT_APP_API}/api/v1/auth/register`,
-        { name, email, password, phone, address }
-      );
-      if (res && res.data.success) {
-        toast.success(res.data.message);
+  e.preventDefault();
+  try {
+    const res = await axios.post(
+      `${process.env.REACT_APP_API}/api/v1/auth/register`,
+      { name, email, password, phone, address, answer }
+    );
 
-        // Delay navigation to the login page
-        setTimeout(() => {
-          navigate("/login");
-        }, 1000); // Adjust the delay time (in milliseconds) as needed
-      } else {
-        toast.error(res.data.message);
-      }
-    } catch (error) {
-      console.log(error);
+    if (res.data && res.data.success) {
+      toast.success(res.data.message);
+      setTimeout(() => {
+        navigate("/login");
+      }, 1000);
+    } else {
+      toast.error(res.data.message || "Registration failed");
+    }
+  } catch (error) {
+    console.error("Registration Error:", error);
+
+    if (error.response) {
+      // The request was made and the server responded with a status code
+      // that falls out of the range of 2xx
+      console.error("Server Response Data:", error.response.data);
+      console.error("Server Response Status:", error.response.status);
+      console.error("Server Response Headers:", error.response.headers);
+      toast.error("Server error: " + error.response.status);
+    } else if (error.request) {
+      // The request was made but no response was received
+      console.error("No Response Received");
+      toast.error("No response from server");
+    } else {
+      // Something happened in setting up the request that triggered an Error
+      console.error("Error Message:", error.message);
       toast.error("Something went wrong");
     }
-  };
+  }
+};
 
   return (
     <Layout title={"Register-Ecommerce App"}>
@@ -79,7 +94,7 @@ const Register = () => {
           </div>
           <div className="mb-3">
             <input
-              type="phone"
+              type="tel"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
               className="form-control"
@@ -96,6 +111,17 @@ const Register = () => {
               className="form-control"
               id="InputAddress"
               placeholder="Enter Your Address"
+              required
+            />
+          </div>
+          <div className="mb-3">
+            <input
+              type="text"
+              value={answer}
+              onChange={(e) => setAnswer(e.target.value)}
+              className="form-control"
+              id="InputAnswer"
+              placeholder="What is your best friend name?"
               required
             />
           </div>
