@@ -42,6 +42,12 @@ const Header = () => {
                   Home
                 </NavLink>
               </li>
+              <li className="nav-item">
+                <NavLink to="/" className="nav-link">
+                  Community Tab
+                </NavLink>
+              </li>
+
 
               {!auth.user ? (
                 <>
